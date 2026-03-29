@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control Taller</title>
+  <style>
+    :root{
+      --bg:#0f172a;
+      --card:#1e293b;
+      --card-2:#334155;
+      --text:#f8fafc;
+      --muted:#cbd5e1;
+      --blue:#2563eb;
+      --blue-2:#1d4ed8;
+      --green:#10b981;
+      --red:#ef4444;
+      --yellow:#f59e0b;
+      --gray:#64748b;
+      --border:#475569;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    header{
+      padding:18px 16px;
+      background:linear-gradient(135deg,#0f172a,#1e3a8a);
+      position:sticky;
+      top:0;
+      z-index:10;
+      border-bottom:1px solid var(--border);
+    }
+    header h1{
+      margin:0;
+      font-size:22px;
+    }
+    header p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+      padding:16px;
+    }
+    .grid{
+      display:grid;
+      gap:14px;
+    }
+    .grid-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px;
+      box-shadow:0 8px 24px rgba(0,0,0,.18);
+    }
+    h2,h3{
+      margin:0 0 12px;
+    }
+    .muted{color:var(--muted)}
+    .row{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:10px;
+      margin-bottom:10px;
+    }
+    label{
+      font-size:13px;
+      color:var(--muted);
+      display:block;
+      margin-bottom:4px;
+    }
+    input, select, textarea{
+      width:100%;
+      border:none;
+      outline:none;
+      border-radius:10px;
+      padding:12px;
+      font-size:14px;
+      background:#0b1220;
+      color:var(--text);
+      border:1px solid var(--border);
+    }
+    button{
+      border:none;
+      border-radius:10px;
+      padding:12px 14px;
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      background:var(--blue);
+      color:#fff;
+    }
+    button:hover{background:var(--blue-2)}
+    .btn-secondary{background:var(--gray)}
+    .btn-secondary:hover{background:#475569}
+    .btn-danger{background:#b91c1c}
+    .btn-danger:hover{background:#991b1b}
+    .btn-green{background:#059669}
+    .btn-green:hover{background:#047857}
+    .summary{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:12px;
+    }
+    .summary-item{
+      background:#0b1220;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+    }
+    .summary-item .label{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .summary-item .value{
+      font-size:22px;
+      font-weight:800;
+    }
+    .toolbar{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      display:inline-block;
+      padding:5px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+    }
+    .pill-proceso{background:rgba(245,158,11,.15); color:#fbbf24}
+    .pill-debe{background:rgba(239,68,68,.15); color:#fca5a5}
+    .pill-pagado{background:rgba(16,185,129,.15); color:#6ee7b7}
+    .pill-alerta{background:rgba(239,68,68,.15); color:#fecaca}
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:14px;
+    }
+    th, td{
+      padding:10px 8px;
+      text-align:left;
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+    }
+    th{
+      color:var(--muted);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .table-wrap{
+      overflow:auto;
+    }
+    .stack > * + *{margin-top:12px}
+    .empty{
+      color:var(--muted);
+      font-size:14px;
+      padding:10px 0;
+    }
+    .two-col{
+      display:grid;
+      grid-template-columns:1.4fr .8fr;
+      gap:14px;
+    }
+    @media (max-width:900px){
+      .two-col{grid-template-columns:1fr}
+    }
+    .notice{
+      background:#0b1220;
+      border:1px dashed var(--border);
+      padding:12px;
+      border-radius:12px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .actions-inline{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+    }
+    .actions-inline button{
+      padding:8px 10px;
+      font-size:12px;
+    }
+    .whatsapp-box{
+      background:#0b1220;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px;
+      white-space:pre-wrap;
+      color:var(--text);
+      font-size:14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Control Taller</h1>
+    <p>Chapa y pintura · control de autos, gastos, cobros, historial y deuda</p>
+  </header>
+
+  <div class="container stack">
+    <section class="card">
+      <h2>Resumen</h2>
+      <div id="summaryCards" class="summary"></div>
+    </section>
+
+    <section class="two-col">
+      <div class="stack">
+        <section class="card">
+          <h2>Agregar trabajo</h2>
+          <div class="row">
+            <div>
+              <label>Cliente</label>
+              <input id="cliente" placeholder="Ej: Quichafren">
+            </div>
+            <div>
+              <label>Patente</label>
+              <input id="patente" placeholder="Ej: AF255FG">
+            </div>
+            <div>
+              <label>Auto / Modelo</label>
+              <input id="modelo" placeholder="Ej: Golf">
+            </div>
+            <div>
+              <label>Trabajo</label>
+              <input id="trabajo" placeholder="Ej: Paragolpe delantero">
+            </div>
+            <div>
+              <label>Precio</label>
+              <input id="precio" type="number" placeholder="Ej: 180000">
+            </div>
+            <div>
+              <label>Estado</label>
+              <select id="estado">
+                <option>En proceso</option>
+                <option>Debe</option>
+                <option>Pagado</option>
+              </select>
+            </div>
+          </div>
+          <button onclick="agregarTrabajo()">Guardar trabajo</button>
+        </section>
+
+        <section class="card">
+          <h2>Agregar gasto general</h2>
+          <div class="row">
+            <div>
+              <label>Concepto</label>
+              <input id="conceptoGasto" placeholder="Ej: Pinturería">
+            </div>
+            <div>
+              <label>Monto</label>
+              <input id="montoGasto" type="number" placeholder="Ej: 50000">
+            </div>
+          </div>
+          <button onclick="agregarGasto()">Guardar gasto</button>
+        </section>
+
+        <section class="card">
+          <h2>Registrar pago parcial</h2>
+          <div class="row">
+            <div>
+              <label>Cliente</label>
+              <input id="pagoCliente" placeholder="Ej: Quichafren">
+            </div>
+            <div>
+              <label>Monto recibido</label>
+              <input id="pagoMonto" type="number" placeholder="Ej: 520000">
+            </div>
+          </div>
+          <button class="btn-green" onclick="registrarPago()">Guardar pago</button>
+        </section>
+      </div>
+
+      <div class="stack">
+        <section class="card">
+          <h2>Buscar</h2>
+          <input id="busqueda" placeholder="Buscar por patente, cliente o auto" oninput="render()">
+          <div class="notice" style="margin-top:10px">
+            Buscá por patente para ver el historial de ese auto y resolver reclamos o garantías más rápido.
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Acciones</h2>
+          <div class="toolbar">
+            <button onclick="cerrarSemana()">Cerrar semana</button>
+            <button class="btn-secondary" onclick="exportarBackup()">Exportar backup</button>
+            <label style="display:block;width:100%">
+              <span class="muted">Importar backup</span>
+              <input type="file" onchange="importarBackup(event)">
+            </label>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Presupuesto rápido WhatsApp</h2>
+          <div class="row">
+            <div>
+              <label>Patente</label>
+              <input id="presPatente" placeholder="Ej: AF255FG">
+            </div>
+            <div>
+              <label>Auto</label>
+              <input id="presAuto" placeholder="Ej: Golf">
+            </div>
+            <div>
+              <label>Trabajo</label>
+              <input id="presTrabajo" placeholder="Ej: Reparación y pintura paragolpe">
+            </div>
+            <div>
+              <label>Precio</label>
+              <input id="presPrecio" type="number" placeholder="Ej: 180000">
+            </div>
+          </div>
+          <button onclick="generarPresupuesto()">Generar texto</button>
+          <div id="presupuestoTexto" class="whatsapp-box" style="margin-top:12px; display:none"></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Autos que deben</h2>
+      <div id="autosDeben"></div>
+    </section>
+
+    <section class="card">
+      <h2>Deuda por cliente</h2>
+      <div id="deudaPorCliente"></div>
+    </section>
+
+    <section class="card">
+      <h2>Trabajos cargados</h2>
+      <div id="trabajosTable"></div>
+    </section>
+
+    <section class="card">
+      <h2>Gastos</h2>
+      <div id="gastosTable"></div>
+    </section>
+
+    <section class="card">
+      <h2>Pagos parciales</h2>
+      <div id="pagosTable"></div>
+    </section>
+
+    <section class="card">
+      <h2>Historial semanal</h2>
+      <div id="historialTable"></div>
+    </section>
+
+    <section class="card">
+      <h2>Ganancia mensual</h2>
+      <div id="mensualTable"></div>
+    </section>
+
+    <section class="card">
+      <h2>Recordatorios de cobro</h2>
+      <div id="recordatoriosCobro"></div>
+    </section>
+  </div>
+
+  <script>
+    let trabajos = JSON.parse(localStorage.getItem('ct_trabajos') || '[]');
+    let gastos = JSON.parse(localStorage.getItem('ct_gastos') || '[]');
+    let pagos = JSON.parse(localStorage.getItem('ct_pagos') || '[]');
+    let historial = JSON.parse(localStorage.getItem('ct_historial') || '[]');
+
+    function guardar() {
+      localStorage.setItem('ct_trabajos', JSON.stringify(trabajos));
+      localStorage.setItem('ct_gastos', JSON.stringify(gastos));
+      localStorage.setItem('ct_pagos', JSON.stringify(pagos));
+      localStorage.setItem('ct_historial', JSON.stringify(historial));
+      render();
+    }
+
+    function ahoraISO() {
+      return new Date().toISOString();
+    }
+
+    function formatMoney(n) {
+      return Number(n || 0).toLocaleString('es-AR');
+    }
+
+    function fechaCorta(iso) {
+      const d = new Date(iso);
+      return d.toLocaleDateString('es-AR');
+    }
+
+    function diasDesde(iso) {
+      const inicio = new Date(iso).getTime();
+      return Math.floor((Date.now() - inicio) / (1000 * 60 * 60 * 24));
+    }
+
+    function escapar(str) {
+      return String(str ?? '').replace(/[&<>"']/g, m => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#39;'
+      }[m]));
+    }
+
+    function agregarTrabajo() {
+      const cliente = document.getElementById('cliente').value.trim();
+      const patente = document.getElementById('patente').value.trim().toUpperCase();
+      const modelo = document.getElementById('modelo').value.trim();
+      const trabajo = document.getElementById('trabajo').value.trim();
+      const precio = Number(document.getElementById('precio').value || 0);
+      const estado = document.getElementById('estado').value;
+
+      if (!patente || !modelo || !trabajo || !precio) {
+        alert('Completá patente, auto, trabajo y precio.');
+        return;
+      }
+
+      trabajos.unshift({
+        id: Date.now(),
+        cliente,
+        patente,
+        modelo,
+        trabajo,
+        precio,
+        estado,
+        fecha: ahoraISO()
+      });
+
+      document.getElementById('cliente').value = '';
+      document.getElementById('patente').value = '';
+      document.getElementById('modelo').value = '';
+      document.getElementById('trabajo').value = '';
+      document.getElementById('precio').value = '';
+      document.getElementById('estado').value = 'En proceso';
+
+      guardar();
+    }
+
+    function agregarGasto() {
+      const concepto = document.getElementById('conceptoGasto').value.trim();
+      const monto = Number(document.getElementById('montoGasto').value || 0);
+
+      if (!concepto || !monto) {
+        alert('Completá concepto y monto.');
+        return;
+      }
+
+      gastos.unshift({
+        id: Date.now(),
+        concepto,
+        monto,
+        fecha: ahoraISO()
+      });
+
+      document.getElementById('conceptoGasto').value = '';
+      document.getElementById('montoGasto').value = '';
+      guardar();
+    }
+
+    function registrarPago() {
+      const cliente = document.getElementById('pagoCliente').value.trim();
+      const monto = Number(document.getElementById('pagoMonto').value || 0);
+
+      if (!cliente || !monto) {
+        alert('Completá cliente y monto.');
+        return;
+      }
+
+      pagos.unshift({
+        id: Date.now(),
+        cliente,
+        monto,
+        fecha: ahoraISO()
+      });
+
+      document.getElementById('pagoCliente').value = '';
+      document.getElementById('pagoMonto').value = '';
+      guardar();
+    }
+
+    function cambiarEstado(id, nuevoEstado) {
+      const t = trabajos.find(x => x.id === id);
+      if (!t) return;
+      t.estado = nuevoEstado;
+      guardar();
+    }
+
+    function borrarTrabajo(id) {
+      if (!confirm('¿Borrar este trabajo?')) return;
+      trabajos = trabajos.filter(t => t.id !== id);
+      guardar();
+    }
+
+    function borrarGasto(id) {
+      if (!confirm('¿Borrar este gasto?')) return;
+      gastos = gastos.filter(g => g.id !== id);
+      guardar();
+    }
+
+    function borrarPago(id) {
+      if (!confirm('¿Borrar este pago?')) return;
+      pagos = pagos.filter(p => p.id !== id);
+      guardar();
+    }
+
+    function deudaCliente(cliente) {
+      const deudaTrabajos = trabajos
+        .filter(t => t.cliente === cliente && t.estado === 'Debe')
+        .reduce((a, b) => a + b.precio, 0);
+
+      const pagosCliente = pagos
+        .filter(p => p.cliente === cliente)
+        .reduce((a, b) => a + b.monto, 0);
+
+      return Math.max(0, deudaTrabajos - pagosCliente);
+    }
+
+    function cerrarSemana() {
+      if (!confirm('¿Cerrar semana? Se guardan ingresos, gastos y ganancia, y se limpia la semana actual.')) return;
+
+      const ingresosSemana = trabajos
+        .filter(t => t.estado === 'Pagado')
+        .reduce((a, b) => a + b.precio, 0);
+
+      const gastosSemana = gastos.reduce((a, b) => a + b.monto, 0);
+
+      historial.unshift({
+        id: Date.now(),
+        fecha: ahoraISO(),
+        ingresos: ingresosSemana,
+        gastos: gastosSemana,
+        ganancia: ingresosSemana - gastosSemana
+      });
+
+      trabajos = trabajos.filter(t => t.estado === 'Debe');
+
+      gastos = [];
+      pagos = [];
+
+      guardar();
+    }
+
+    function exportarBackup() {
+      const data = { trabajos, gastos, pagos, historial };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'control-taller-backup.json';
+      a.click();
+    }
+
+    function importarBackup(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = JSON.parse(e.target.result);
+          trabajos = data.trabajos || [];
+          gastos = data.gastos || [];
+          pagos = data.pagos || [];
+          historial = data.historial || [];
+          guardar();
+          alert('Backup importado correctamente.');
+        } catch {
+          alert('No se pudo importar el archivo.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function generarPresupuesto() {
+      const patente = document.getElementById('presPatente').value.trim().toUpperCase();
+      const auto = document.getElementById('presAuto').value.trim();
+      const trabajo = document.getElementById('presTrabajo').value.trim();
+      const precio = Number(document.getElementById('presPrecio').value || 0);
+
+      if (!patente || !auto || !trabajo || !precio) {
+        alert('Completá todos los campos del presupuesto.');
+        return;
+      }
+
+      const texto = `Presupuesto de reparación
+
+Vehículo: ${auto}
+Patente: ${patente}
+
+Trabajo: ${trabajo}
+
+Precio: $${formatMoney(precio)}
+
+Cualquier duda avisame.`;
+
+      const box = document.getElementById('presupuestoTexto');
+      box.style.display = 'block';
+      box.textContent = texto;
+    }
+
+    function agruparGananciaMensual() {
+      const mapa = {};
+
+      historial.forEach(h => {
+        const d = new Date(h.fecha);
+        const clave = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+        mapa[clave] = (mapa[clave] || 0) + Number(h.ganancia || 0);
+      });
+
+      return mapa;
+    }
+
+    function renderSummary() {
+      const autosProceso = trabajos.filter(t => t.estado === 'En proceso').length;
+      const autosDebe = trabajos.filter(t => t.estado === 'Debe').length;
+      const plataEnCalle = trabajos.filter(t => t.estado === 'Debe').reduce((a, b) => a + b.precio, 0);
+      const gastosActuales = gastos.reduce((a, b) => a + b.monto, 0);
+      const ingresosCobrados = trabajos.filter(t => t.estado === 'Pagado').reduce((a, b) => a + b.precio, 0);
+      const gananciaSemana = ingresosCobrados - gastosActuales;
+
+      const mensual = agruparGananciaMensual();
+      const hoy = new Date();
+      const claveActual = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, '0')}`;
+      const gananciaMes = mensual[claveActual] || 0;
+
+      document.getElementById('summaryCards').innerHTML = `
+        <div class="summary-item">
+          <div class="label">Autos en proceso</div>
+          <div class="value">${autosProceso}</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">Autos que deben</div>
+          <div class="value">${autosDebe}</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">Plata en la calle</div>
+          <div class="value">$${formatMoney(plataEnCalle)}</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">Ganancia semana</div>
+          <div class="value">$${formatMoney(gananciaSemana)}</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">Ganancia mes</div>
+          <div class="value">$${formatMoney(gananciaMes)}</div>
+        </div>
+      `;
+    }
+
+    function renderAutosDeben() {
+      const debe = trabajos.filter(t => t.estado === 'Debe');
+
+      if (!debe.length) {
+        document.getElementById('autosDeben').innerHTML = '<div class="empty">No hay autos que deban plata.</div>';
+        return;
+      }
+
+      document.getElementById('autosDeben').innerHTML = `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Patente</th>
+                <th>Auto</th>
+                <th>Trabajo</th>
+                <th>Monto</th>
+                <th>Días</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${debe.map(t => `
+                <tr>
+                  <td>${escapar(t.cliente || '-')}</td>
+                  <td>${escapar(t.patente)}</td>
+                  <td>${escapar(t.modelo)}</td>
+                  <td>${escapar(t.trabajo)}</td>
+                  <td>$${formatMoney(t.precio)}</td>
+                  <td>${diasDesde(t.fecha)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderDeudaPorCliente() {
+      const clientes = [...new Set(trabajos.map(t => (t.cliente || '').trim()).filter(Boolean))];
+      const data = clientes
+        .map(cliente => {
+          const autos = trabajos.filter(t => t.cliente === cliente && t.estado === 'Debe');
+          return {
+            cliente,
+            autos: autos.length,
+            deuda: deudaCliente(cliente)
+          };
+        })
+        .filter(x => x.autos > 0 || x.deuda > 0)
+        .sort((a, b) => b.deuda - a.deuda);
+
+      if (!data.length) {
+        document.getElementById('deudaPorCliente').innerHTML = '<div class="empty">No hay deuda agrupada por cliente.</div>';
+        return;
+      }
+
+      document.getElementById('deudaPorCliente').innerHTML = `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Autos</th>
+                <th>Deuda restante</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${data.map(d => `
+                <tr>
+                  <td>${escapar(d.cliente)}</td>
+                  <td>${d.autos}</td>
+                  <td>$${formatMoney(d.deuda)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderTrabajos() {
+      const q = (document.getElementById('busqueda').value || '').toLowerCase().trim();
+
+      const filtrados = trabajos.filter(t =>
+        (t.patente || '').toLowerCase().includes(q) ||
+        (t.cliente || '').toLowerCase().includes(q) ||
+        (t.modelo || '').toLowerCase().includes(q)
+      );
+
+      if (!filtrados.length) {
+        document.getElementById('trabajosTable').innerHTML = '<div class="empty">No hay trabajos cargados.</div>';
+        return;
+      }
+
+      document.getElementById('trabajosTable').innerHTML = `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Patente</th>
+                <th>Auto</th>
+                <th>Trabajo</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${filtrados.map(t => `
+                <tr>
+                  <td>${escapar(t.cliente || '-')}</td>
+                  <td>${escapar(t.patente)}</td>
+                  <td>${escapar(t.modelo)}</td>
+                  <td>${escapar(t.trabajo)}</td>
+                  <td>$${formatMoney(t.precio)}</td>
+                  <td>
+                    <select onchange="cambiarEstado(${t.id}, this.value)">
+                      <option ${t.estado === 'En proceso' ? 'selected' : ''}>En proceso</option>
+                      <option ${t.estado === 'Debe' ? 'selected' : ''}>Debe</option>
+                      <option ${t.estado === 'Pagado' ? 'selected' : ''}>Pagado</option>
+                    </select>
+                  </td>
+                  <td>${fechaCorta(t.fecha)}</td>
+                  <td>
+                    <div class="actions-inline">
+                      <button onclick="editarTrabajo(${t.id})">Editar</button>
+                      <button class="btn-danger" onclick="borrarTrabajo(${t.id})">Borrar</button>
+                    </div>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderGastos() {
+      if (!gastos.length) {
+        document.getElementById('gastosTable').innerHTML = '<div class="empty">No hay gastos cargados.</div>';
+        return;
+      }
+
+      document.getElementById('gastosTable').innerHTML = `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Concepto</th>
+                <th>Monto</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${gastos.map(g => `
+                <tr>
+                  <td>${fechaCorta(g.fecha)}</td>
+                  <td>${escapar(g.concepto)}</td>
+                  <td>$${formatMoney(g.monto)}</td>
+                  <td><button class="btn-danger" onclick="borrarGasto(${g.id})">Borrar</button></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderPagos() {
+      if (!pagos.length) {
+        document.getElementById('pagosTable').innerHTML = '<div class="empty">No hay pagos parciales cargados.</div>';
+        return;
+      }
+
+      document.getElementById('pagosTable').innerHTML = `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Monto</th>
+                <th>Deuda restante</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${pagos.map(p => `
+                <tr>
+                  <td>${fechaCorta(p.fecha)}</td>
+                  <td>${escapar(p.cliente)}</td>
+                  <td>$${formatMoney(p.monto)}</td>
+                  <td>$${formatMoney(deudaCliente(p.cliente))}</td>
+                  <td><button class="btn-danger" onclick="borrarPago(${p.id})">Borrar</button></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderHistorial() {
+      if (!historial.length) {
+        document.getElementById('historialTable').innerHTML = '<div class="empty">Todavía no cerraste ninguna semana.</div>';
+        return;
+      }
+
+      document.getElementById('historialTable').innerHTML = `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Ingresos</th>
+                <th>Gastos</th>
+                <th>Ganancia</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${historial.map(h => `
+                <tr>
+                  <td>${fechaCorta(h.fecha)}</td>
+                  <td>$${formatMoney(h.ingresos)}</td>
+                  <td>$${formatMoney(h.gastos)}</td>
+                  <td>$${formatMoney(h.ganancia)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderMensual() {
+      const mensual = agruparGananciaMensual();
+      const entries = Object.entries(mensual).sort((a,b) => b[0].localeCompare(a[0]));
+
+      if (!entries.length) {
+        document.getElementById('mensualTable').innerHTML = '<div class="empty">Todavía no hay ganancia mensual calculada.</div>';
+        return;
+      }
+
+      document.getElementById('mensualTable').innerHTML = `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Mes</th>
+                <th>Ganancia</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${entries.map(([mes, gan]) => `
+                <tr>
+                  <td>${mes}</td>
+                  <td>$${formatMoney(gan)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderRecordatorios() {
+      const alertas = trabajos
+        .filter(t => t.estado === 'Debe')
+        .map(t => ({...t, dias: diasDesde(t.fecha)}))
+        .filter(t => t.dias >= 7)
+        .sort((a,b) => b.dias - a.dias);
+
+      if (!alertas.length) {
+        document.getElementById('recordatoriosCobro').innerHTML = '<div class="empty">No hay recordatorios de cobro pendientes.</div>';
+        return;
+      }
+
+      document.getElementById('recordatoriosCobro').innerHTML = `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Patente</th>
+                <th>Auto</th>
+                <th>Monto</th>
+                <th>Días</th>
+                <th>Mensaje</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${alertas.map(t => {
+                const mensaje = `Hola, te escribo del taller. Quedó pendiente el pago del ${t.modelo} patente ${t.patente}. El saldo es de $${formatMoney(t.precio)}. Cuando puedas avisame así coordinamos el pago. Gracias.`;
+                return `
+                  <tr>
+                    <td>${escapar(t.cliente || '-')}</td>
+                    <td>${escapar(t.patente)}</td>
+                    <td>${escapar(t.modelo)}</td>
+                    <td>$${formatMoney(t.precio)}</td>
+                    <td><span class="pill pill-alerta">${t.dias} días</span></td>
+                    <td>${escapar(mensaje)}</td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    
+function editarTrabajo(id) {
+  const t = trabajos.find(x => x.id === id);
+  if (!t) return;
+
+  const nuevoCliente = prompt("Cliente:", t.cliente || "");
+  if (nuevoCliente === null) return;
+
+  const nuevaPatente = prompt("Patente:", t.patente);
+  if (nuevaPatente === null) return;
+
+  const nuevoModelo = prompt("Auto / Modelo:", t.modelo);
+  if (nuevoModelo === null) return;
+
+  const nuevoTrabajo = prompt("Trabajo:", t.trabajo);
+  if (nuevoTrabajo === null) return;
+
+  const nuevoPrecio = prompt("Precio:", t.precio);
+  if (nuevoPrecio === null) return;
+
+  const nuevaFecha = prompt("Fecha (YYYY-MM-DD):", t.fecha.split("T")[0]);
+  if (nuevaFecha === null) return;
+
+  t.cliente = nuevoCliente.trim();
+  t.patente = nuevaPatente.trim().toUpperCase();
+  t.modelo = nuevoModelo.trim();
+  t.trabajo = nuevoTrabajo.trim();
+  t.precio = Number(nuevoPrecio) || 0;
+  t.fecha = new Date(nuevaFecha).toISOString();
+
+  guardar();
+}
+
+function render() {
+      renderSummary();
+      renderAutosDeben();
+      renderDeudaPorCliente();
+      renderTrabajos();
+      renderGastos();
+      renderPagos();
+      renderHistorial();
+      renderMensual();
+      renderRecordatorios();
+    }
+
+    render();
+  </script>
+</body>
+</html>
